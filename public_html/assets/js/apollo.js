@@ -11,6 +11,47 @@
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
+document.addEventListener("DOMContentLoaded", () => {
+  const particleContainer = document.getElementById('particles');
+  const numberOfParticles = 100;
+
+  function createParticle() {
+    const particle = document.createElement('div');
+    particle.classList.add('particle');
+    
+    const size = Math.random() * 3 + 2; // Particle size between 2px and 5px
+    particle.style.width = `${size}px`;
+    particle.style.height = `${size}px`;
+    
+    // Positioning the particles randomly on the screen
+    const xStart = Math.random() * window.innerWidth;
+    const yStart = Math.random() * window.innerHeight;
+    particle.style.left = `${xStart}px`;
+    particle.style.top = `${yStart}px`;
+    
+    // Random movement in the x and y directions
+    const xMovement = Math.random() * 200 - 100;  // Between -100px and 100px
+    const yMovement = Math.random() * 200 - 100;  // Between -100px and 100px
+    particle.style.setProperty('--x', `${xMovement}px`);
+    particle.style.setProperty('--y', `${yMovement}px`);
+
+    // Add particle to the container
+    particleContainer.appendChild(particle);
+    
+    // Remove the particle after the animation completes (5 seconds)
+    setTimeout(() => {
+      particle.remove();
+    }, 5000);
+  }
+
+  // Generate particles at regular intervals
+  setInterval(createParticle, 100); // Generate a new particle every 100ms
+
+  // Adjust for screen resizing
+  window.addEventListener('resize', () => {
+    particleContainer.innerHTML = ''; // Clear particles on resize
+  });
+});
 
 // smooth scroll
 $(document).ready(function(){
@@ -60,8 +101,7 @@ $(window).on("load", function() {
 function initMap() {
 // Styles a map in night mode.
     var map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: 40.674, lng: -73.945},
-        zoom: 12,
+        center: {lat: -0.68174, lng: 34.76666},
         scrollwheel:  false,
         navigationControl: false,
         mapTypeControl: false,
